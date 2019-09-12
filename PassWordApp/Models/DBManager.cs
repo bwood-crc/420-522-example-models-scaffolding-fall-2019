@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PassWordApp.Models.ExtensionMethods;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -35,7 +36,16 @@ namespace PassWordApp.Models
 
         public void Update(PassWord p)
         {
-            //
+            PassWord pw = DB.passWordList.Where(x => x.PassWordId == p.PassWordId).First();
+
+            //pw.PassWordKey = p.PassWordKey;
+            //pw.PassWordValue = p.PassWordValue;
+            //pw.Note = p.Note;
+
+            // Better to make an extension method here.
+            // And even better to make a GENERIC extension method here.
+            // see: https://www.c-sharpcorner.com/UploadFile/ff2f08/deep-copy-of-object-in-C-Sharp/
+            p.CopyTo(pw);
         }
 
     }
